@@ -1,19 +1,39 @@
+import type { Metadata } from "next";
+import Image from "next/image";
 import Link from "next/link";
 import Header from "../components/Header";
 import Footer from "../components/Footer";
+import { posts } from "./posts";
+
+export const metadata: Metadata = {
+  title: "部落格 | 台灣芒果簡介",
+};
 
 export default function BlogPage() {
   return (
     <div className="min-h-screen flex flex-col">
       <Header />
 
-      <main className="flex-grow max-w-3xl mx-auto glass p-10 mt-28 mb-10 rounded-3xl">
-        <h1 className="text-4xl font-bold mb-6">關於芒果的兒時記憶</h1>
-        <p className="text-lg leading-relaxed text-gray-800">
-          記憶中，夏天的味道總是與芒果綁在一起。小時候，父親總會在盛產季時，提著兩大袋沉甸甸的愛文芒果回家。那時候，我們總會在客廳中央鋪上一張大大的舊報紙，全家人圍成一圈席地而坐。父親熟練地拿起水果刀，切開金黃香甜的果肉，那股濃郁的香氣瞬間填滿了整間屋子。我們不顧果汁流得滿手都是，只顧著大口享受那份簡單卻極致的美味。那種全家人坐在一起，單純因一顆芒果而感到快樂的時光，至今仍是我心中最溫暖的夏日記憶。
-        </p>
-        <div className="mt-8">
-          <Link href="/" className="text-blue-600 hover:underline">← 返回首頁</Link>
+      <main className="flex-grow w-full max-w-4xl mx-auto px-4 mt-28 mb-10">
+        <h1 className="text-4xl font-bold mb-8 text-center">芒果部落格</h1>
+        <div className="grid gap-8 md:grid-cols-2">
+          {posts.map((post) => (
+            <Link
+              key={post.slug}
+              href={`/blog/${post.slug}`}
+              className="glass overflow-hidden flex flex-col hover:-translate-y-1 hover:shadow-2xl transition"
+            >
+              <div className="relative h-48 bg-white/10">
+                <Image src={post.cover} alt={post.title} fill className="object-cover" />
+              </div>
+              <div className="p-6 flex flex-col gap-2">
+                <time dateTime={post.date} className="text-sm text-amber-700">{post.date}</time>
+                <h2 className="text-2xl font-bold">{post.title}</h2>
+                <p className="text-gray-700">{post.excerpt}</p>
+                <span className="mt-2 text-sm font-semibold text-amber-800">閱讀全文 →</span>
+              </div>
+            </Link>
+          ))}
         </div>
       </main>
 
