@@ -2,7 +2,7 @@ import type { Metadata } from "next";
 import "./globals.css";
 
 export const metadata: Metadata = {
-  title: "台灣芒果簡介v2",
+  title: "台灣芒果簡介",
   description: "探索台灣美味芒果品種",
   icons: {
     icon: "/mango-elf.svg",
